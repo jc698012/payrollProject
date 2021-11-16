@@ -4,7 +4,7 @@
     <body>
         <h1>Add a new employee</h1>
         <form action="." method="post" id="aligned" >
-            <input type="hidden" name="action" value="add_client">
+            <input type="hidden" name="action" value="add_employee">
             
             
             <label>First Name:</label>
@@ -24,7 +24,7 @@
             <label>Pay</label>
             <select name="pay" id="pay">
                 <option value="weekly">Weekly</option>
-                <option value="every2weeks">Every 2 weeks</option>
+                <option value="Biweekly ">Biweekly</option>
             </select><br><br>
             
             <label>Hourly Wage:</label>
