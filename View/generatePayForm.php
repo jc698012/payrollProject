@@ -1,4 +1,4 @@
-
+<?php $i = 0?>
 
 <h1>Employees</h1>
   
@@ -15,11 +15,8 @@
             <th></th>
             
         </tr>
-        <?php var_dump($employees) ?>
         <form action="." method="post">
-            <input type="hidden" name="generatePaymentReport" value="generatePaymentReport">
-            
-        
+        <input type="hidden" name="generatePaymentReport" value="generatPDF_report">
         <?php foreach ($employees as $employee) : ?>
         <tr>
             <td><?php echo $employee->getFirstName(); ?> </td>
@@ -27,17 +24,25 @@
             <td><?php echo $employee->getPosition(); ?> </td>
             <td>$<?php echo $employee->getHourlyWage(); ?> </td>
             <td><?php echo $employee->getPaymentType(); ?> </td>
-            <td><input type="text" id="numberHours"></td>
-            <td><input type="text" id="overtime"></td     
+         
+             
+          
+           
+           <td><input type="text" name="numberHours"  ></td>
+           <td><input type="text" name="overtime"></td    
+           
+            
+        
+        
         </tr>
-        <?php endforeach; ?>
+       <?php endforeach; ?>
         
     </table>
 <input type="submit" value="Generate Payment">
         </form>
 </main>
 
-            
+
 <!--                <form action="." method="post">
             <input type="hidden" name="employeeId"
                        value="<?php echo $employee->getEmployeeId(); ?>">

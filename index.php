@@ -19,6 +19,7 @@ if ($action === NULL) {
 switch($action) {
     case 'employee_page':
         $employees = EmployeesDB::getAllEmployees();
+//        $testing = filter_input(INPUT_POST, 'numberHours');
         include('view/employee_page.php');
         break;
     case 'add_employee_form':
@@ -38,11 +39,15 @@ switch($action) {
         $employeeId = filter_input(INPUT_POST, 'employeeId');
         $employee = EmployeesDB::getEmployee($employeeId);
         include('view/show_edit_employee_form.php');
-    case 'generate_payment_form':
+    case 'generate_pdf_report':
         $pay = filter_input(INPUT_POST, 'pay');
         $employees = EmployeesDB::getPayEmployees($pay);
         $header = EmployeesDB::getHeader();
         include('view/generatePDFReport.php');
-//        include('view/generatePayForm.php');
+    case 'generate_payment_form':
+        $pay = filter_input(INPUT_POST, 'pay');
+        $employees = EmployeesDB::getPayEmployees($pay);
+        include('view/generatepayForm.php');
+       
     
 }
