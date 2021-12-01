@@ -55,7 +55,7 @@ foreach ($employees as $employee)
     $pdf->Cell($width_cell[3],10,"$".$employee['hourlyWage'],1,0,'C',$fill);
     $pdf->Cell($width_cell[4],10,$employee['paymentType'],1,0,'C',$fill);
     $pdf->Cell($width_cell[5],10,$employee['numberHours'],1,0,'C',$fill);
-    $pdf->Cell($width_cell[6],10,$employee['total'],1,1,'C',$fill);
+    $pdf->Cell($width_cell[6],10,"$".$employee['total'],1,1,'C',$fill);
     
 }
 

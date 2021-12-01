@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2021 a las 09:42:39
+-- Tiempo de generación: 01-12-2021 a las 09:47:53
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.1
 
@@ -51,6 +51,20 @@ INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `position`, `phon
 (3, 'Third', 'De Niro', 'IT', '123-456-7899', 'Weekly', 12, 'Cash'),
 (4, 'Valentina', 'Gonzalez', 'Manager', '123-456-7899', 'Biweekly ', 13, 'check');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `payments`
+--
+
+DROP TABLE IF EXISTS `payments`;
+CREATE TABLE `payments` (
+  `paymentNumber` int(11) NOT NULL,
+  `employeeId` varchar(10) NOT NULL,
+  `numberHours` varchar(10) NOT NULL,
+  `total` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Índices para tablas volcadas
 --
@@ -62,6 +76,12 @@ ALTER TABLE `employee`
   ADD PRIMARY KEY (`employeeId`);
 
 --
+-- Indices de la tabla `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`paymentNumber`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -70,6 +90,12 @@ ALTER TABLE `employee`
 --
 ALTER TABLE `employee`
   MODIFY `employeeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `paymentNumber` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

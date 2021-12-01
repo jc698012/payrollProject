@@ -44,7 +44,7 @@
                 
         </tr>
         <?php endforeach; ?>
-        <form action="." method="post" id="aligned" >
+<!--        <form action="." method="post" id="aligned" >
             <input type="hidden" name="action" value="generate_pdf_report">
       
         <label>Select Option</label>
@@ -54,7 +54,7 @@
             </select><br><br>
         
         <input type="submit" value="Report">
-        </form>
+        </form>-->
         
          <form action="." method="post" id="aligned" >
             <input type="hidden" name="action" value="generate_payment_form">
