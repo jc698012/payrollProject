@@ -1,4 +1,4 @@
-
+<?php include 'view/header.php'; ?>
 
 <h1>Employees</h1>
   <br>

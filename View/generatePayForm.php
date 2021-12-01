@@ -1,5 +1,5 @@
 
-
+<?php include 'view/header.php'; ?>
 <h1>Employees</h1>
   
     <table>
@@ -10,16 +10,14 @@
             <th>Hourly Wage</th>
             <th>Payment type</th>
             <th>Number of Hours</th>
-            <th>Overtime</th>
             
             <th></th>
             
         </tr>
          
-        <form action="." method="post">
-        <input type="hidden" name="generatePaymentReport" value="employee_page">
+        
+       
         <?php foreach ($employees as $employee) : ?>
-        <tbody>
         <tr>
             <td><?php echo $employee->getFirstName(); ?> </td>
             <td><?php echo $employee->getLastName(); ?> </td>
@@ -27,22 +25,16 @@
             <td>$<?php echo $employee->getHourlyWage(); ?> </td>
             <td><?php echo $employee->getPaymentType(); ?> </td>  
             <td><input type="text"  wage="<?php echo $employee->getHourlyWage();?>" name="numberHours"  id="<?php echo $employee->getEmployeeId()?>" onchange="handleChange(this)" ></td>
-            <td><input type="text" name="overtime"></td    
-        
             
         </tr>
-        </tbody>
        <?php endforeach; ?>
         
     </table>
+<form action="index.php" method="post">
+        <input type="hidden" name="action" value="insert_payment">
 <input type="submit" value="Generate Payment" >
         </form>
         
-
-</main>
-
-
-
 <script>
     let info=[]
     
@@ -79,9 +71,9 @@
        
        
         console.log(info)
-        var pretty = JSON.stringify(info)
-        console.log(pretty)
-        document.cookie = "pretty = " + pretty 
+        var pretty = JSON.stringify(info);
+        console.log(pretty);
+        document.cookie = "pretty = " + pretty ;
 
         
    }
@@ -90,6 +82,12 @@
 
    
     </script>
+    
+</main>
+
+
+
+
 
 
    

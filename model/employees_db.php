@@ -55,6 +55,20 @@ class EmployeesDB {
 
         }
         
+          public static function Payment($employeeId, $numberHours, $total)
+    {
+        $db = Database::getDB();
+        $query = 'INSERT INTO payments (employeeId, numberHours, total)
+                  VALUES (:employeeId
+                         ,:numberHours
+                         ,:total';
+        $statement = $db->prepare($query);
+        $statement->bindValue('employeeId', $employeeId);
+        $statement->bindValue('numberHours', $numberHours);
+        $statement->bindValue('total', $total);
+        $statement->closeCursor();
+    }
+        
           public static function AddNewEmployee($firstName, $lastName, $position, $phoneNumber,  $pay, $hourlyWage, $paymentType) {
 
         $db = Database::getDB();
@@ -107,18 +121,28 @@ class EmployeesDB {
                 
     }
     
-    public static function insertPayment($employeeId, $numberHours, $total)
-    {
+  
+    
+    public static function getHeader() {
+
+
         $db = Database::getDB();
-        $query = 'INSERT INTO payment (employeeId, numberHours, total)
-                  VALUES (:employeeId
-                         ,:numberHours
-                         ,:total';
+
+        $query = "SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_NAME = 'employee'
+        AND COLUMN_NAME in ('firstName', 'lastName', 'position','phoneNumber','pay','hourlyWage','paymentType')
+        ORDER BY ORDINAL_POSITION";
+
+
         $statement = $db->prepare($query);
-        $statement->bindValue('employeeId', $employeeId);
-        $statement->bindValue('numberHours', $numberHours);
-        $statement->bindValue('total', $total);
+
+        $statement->execute();
+        $rows = $statement->fetchAll();
         $statement->closeCursor();
+
+                return $rows;
+
     }
 }
     

@@ -7,6 +7,7 @@ require('model/fpdf.php');
 require('model/font/helveticab.php');
 
 
+
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
     $action = filter_input(INPUT_GET, 'action');
@@ -19,23 +20,6 @@ if ($action === NULL) {
 switch($action) {
     case 'employee_page':
         $employees = EmployeesDB::getAllEmployees();
-        $info= $_COOKIE['pretty'];
-  
-        $newInfo = json_decode($info,TRUE);
-        
-       
-                
-                for ($i = 0; $i < count($newInfo); $i++)
-                {
-                    echo $newInfo[$i]['id']; echo "<br>";
-                    $employeeId = $newInfo[$i]['id'];
-                    echo $newInfo[$i]['hours']; echo "<br>";
-                    $numberHours = $newInfo[$i]['hours'];
-                    echo $newInfo[$i]['total']; echo "<br>";
-                    $total = $newInfo[$i]['total'];
-                    EmployeesDB::insertPayment($employeeId, $numberHours, $total);
-                }
-
         include('view/employee_page.php');
         break;
     case 'add_employee_form':
@@ -51,20 +35,54 @@ switch($action) {
         $paymentType = filter_input(INPUT_POST, 'paymentType');
         EmployeesDB::AddNewEmployee($firstName, $lastName, $position, $phoneNumber, $pay, $hourlyWage, $paymentType);
         include('view/show_add_employee_form.php');
+        break;
     case 'edit_employee_form':
         $employeeId = filter_input(INPUT_POST, 'employeeId');
         $employee = EmployeesDB::getEmployee($employeeId);
         include('view/show_edit_employee_form.php');
+        break;
     case 'generate_pdf_report':
         $pay = filter_input(INPUT_POST, 'pay');
         $employees = EmployeesDB::getPayEmployees($pay);
         $header = EmployeesDB::getHeader();
         include('view/generatePDFReport.php');
+        break;
     case 'generate_payment_form':
         $pay = filter_input(INPUT_POST, 'pay');
         $employees = EmployeesDB::getPayEmployees($pay);
         include('view/generatePayForm.php');
-    case 'testing':
-        include('testing.php');
+        break;
+    case 'insert_payment':
+         if (isset( $_COOKIE['pretty']))
+{
+    $info = $_COOKIE['pretty'];
+    $newInfo = json_decode($info,TRUE);
+                for ($i = 0; $i < count($newInfo); $i++)
+                {
+                    
+                    $employeeId = $newInfo[$i]['id'];
+                    echo "employeeID" . $employeeId;echo "<br>";
+                    
+                    
+                    $numberHours = $newInfo[$i]['hours'];
+                    echo "employeeHours" . $numberHours;echo "<br>";
+                    
+                    
+                    $total = $newInfo[$i]['total'];
+                    echo "total" . $total;echo "<br>";
+                    EmployeesDB::Payment($employeeId, $numberHours, $total);
+
+
+                }
+                
+                
+              
+}
+        include('view/insert_payment.php');
+        break;
+
+       
+
     
 }
+?>
