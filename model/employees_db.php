@@ -55,17 +55,18 @@ class EmployeesDB {
 
         }
         
-          public static function Payment($employeeId, $numberHours, $total)
+         public static function Payment($employeeId, $numberHours, $total)
     {
         $db = Database::getDB();
         $query = 'INSERT INTO payments (employeeId, numberHours, total)
                   VALUES (:employeeId
                          ,:numberHours
-                         ,:total';
+                         ,:total)';
         $statement = $db->prepare($query);
         $statement->bindValue('employeeId', $employeeId);
         $statement->bindValue('numberHours', $numberHours);
         $statement->bindValue('total', $total);
+        $statement->execute();
         $statement->closeCursor();
     }
         
@@ -144,8 +145,32 @@ class EmployeesDB {
                 return $rows;
 
     }
+    
+     public static function getEmployeePayment($pay) 
+    {
+        $db = Database::getDB();
+        $query = 'SELECT e.firstName, e.lastName, e.position, e.hourlyWage, e.paymentType, p.numberHours, p.total
+                  FROM employee as e
+                  inner join payments as p
+                  on e.employeeId = p.employeeId
+                  where pay = :pay';
+        $statement = $db->prepare($query);
+        $statement->bindValue('pay', $pay);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+        $statement->closeCursor();
+        
+       
+        
+        return $rows;
+        
+        
+    }
+
 }
     
-    ?>
+   
+    
+   
        
 

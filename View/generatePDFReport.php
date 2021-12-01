@@ -14,7 +14,7 @@ $pdf->AddPage('L');
 //	foreach($row as $column)
 //		$pdf->Cell(95,12,$column,1);
 //}
-$width_cell=array(30,30,30,40,40,40,30,40);
+$width_cell=array(30,30,30,40,40,50,40,40);
 $pdf->SetFont('Arial','B',14);
 
 
@@ -36,8 +36,8 @@ $pdf->Cell($width_cell[3],10,'Hourly Wage',1,0,'C',true);
 //Third header column//
 $pdf->Cell($width_cell[4],10,'Payment Type',1,0,'C',true); 
 $pdf->Cell($width_cell[5],10,'Number of Hours',1,0,'C',true); 
-$pdf->Cell($width_cell[6],10,'Overtime',1,0,'C',true); 
-$pdf->Cell($width_cell[7],10,'Total Amount',1,1,'C',true);
+$pdf->Cell($width_cell[6],10,'Total Amount',1,1,'C',true); 
+
 //// header ends ///////
 
 $pdf->SetFont('Arial','',14);
@@ -49,11 +49,14 @@ $fill=false;
 
 foreach ($employees as $employee)
 {
-    $pdf->Cell($width_cell[0],10,$employee->getFirstName(),1,0,'C',$fill);
-    $pdf->Cell($width_cell[1],10,$employee->getLastName(),1,0,'C',$fill);
-    $pdf->Cell($width_cell[2],10,$employee->getPosition(),1,0,'C',$fill);
-    $pdf->Cell($width_cell[3],10,"$".($employee->getHourlyWage()),1,0,'C',$fill);
-    $pdf->Cell($width_cell[4],10,$employee->getPaymentType(),1,1,'C',$fill);
+    $pdf->Cell($width_cell[0],10,$employee['firstName'],1,0,'C',$fill);
+    $pdf->Cell($width_cell[1],10,$employee['lastName'],1,0,'C',$fill);
+    $pdf->Cell($width_cell[2],10,$employee['position'],1,0,'C',$fill);
+    $pdf->Cell($width_cell[3],10,"$".$employee['hourlyWage'],1,0,'C',$fill);
+    $pdf->Cell($width_cell[4],10,$employee['paymentType'],1,0,'C',$fill);
+    $pdf->Cell($width_cell[5],10,$employee['numberHours'],1,0,'C',$fill);
+    $pdf->Cell($width_cell[6],10,$employee['total'],1,1,'C',$fill);
+    
 }
 
 

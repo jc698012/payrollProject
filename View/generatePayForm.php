@@ -32,6 +32,7 @@
     </table>
 <form action="index.php" method="post">
         <input type="hidden" name="action" value="insert_payment">
+        <input type="hidden" name="pay" value="<?php echo $pay ?>">
 <input type="submit" value="Generate Payment" >
         </form>
         

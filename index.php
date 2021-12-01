@@ -53,6 +53,7 @@ switch($action) {
         include('view/generatePayForm.php');
         break;
     case 'insert_payment':
+        $pay = filter_input(INPUT_POST, 'pay');
          if (isset( $_COOKIE['pretty']))
 {
     $info = $_COOKIE['pretty'];
@@ -61,24 +62,25 @@ switch($action) {
                 {
                     
                     $employeeId = $newInfo[$i]['id'];
-                    echo "employeeID" . $employeeId;echo "<br>";
+                    
                     
                     
                     $numberHours = $newInfo[$i]['hours'];
-                    echo "employeeHours" . $numberHours;echo "<br>";
+                    
                     
                     
                     $total = $newInfo[$i]['total'];
-                    echo "total" . $total;echo "<br>";
+                    
                     EmployeesDB::Payment($employeeId, $numberHours, $total);
 
 
                 }
                 
-                
-              
+             
 }
-        include('view/insert_payment.php');
+$employees = EmployeesDB::getEmployeePayment($pay);
+
+        include('view/generatePDFReport.php');
         break;
 
        
