@@ -19,7 +19,9 @@
             
             <th></th>
         </tr>
-        
+            
+      
+
         <?php foreach ($employees as $employee) : ?>
         <tr>
             <td><?php echo $employee->getFirstName(); ?> </td>
@@ -38,8 +40,6 @@
                     <input type="submit" value="Edit">
                 </form>
             </td>
-            
-           
                 
                 
         </tr>
@@ -54,6 +54,7 @@
             </select><br><br>
         
         <input type="submit" value="Report">
+        </form>
         
          <form action="." method="post" id="aligned" >
             <input type="hidden" name="action" value="generate_payment_form">
@@ -65,6 +66,7 @@
             </select><br><br>
         
         <input type="submit" value="Payment Form">
+         </form>
     </table>
 </main>
 

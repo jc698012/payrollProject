@@ -107,39 +107,21 @@ class EmployeesDB {
                 
     }
     
-    public static function getHeader() {
-        
-        
+    public static function insertPayment($employeeId, $numberHours, $total)
+    {
         $db = Database::getDB();
-        
-        $query = "SELECT COLUMN_NAME
-
-FROM INFORMATION_SCHEMA.COLUMNS
-
-WHERE TABLE_NAME = 'employee'
-AND COLUMN_NAME in ('firstName', 'lastName', 'position','phoneNumber','pay','hourlyWage','paymentType')
-
-
-ORDER BY ORDINAL_POSITION";
-        
-        
+        $query = 'INSERT INTO payment (employeeId, numberHours, total)
+                  VALUES (:employeeId
+                         ,:numberHours
+                         ,:total';
         $statement = $db->prepare($query);
-        
-        $statement->execute();
-        $rows = $statement->fetchAll();
+        $statement->bindValue('employeeId', $employeeId);
+        $statement->bindValue('numberHours', $numberHours);
+        $statement->bindValue('total', $total);
         $statement->closeCursor();
-       
-                return $rows;
-        
     }
 }
-        
-//                 "SELECT UCASE(`COLUMN_NAME`) 
-//                FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-//                WHERE `TABLE_SCHEMA`='crud' 
-//                AND `TABLE_NAME`='employee'
-//                and `COLUMN_NAME` in ('firstName','lastName')";
-//        
-        
+    
+    ?>
        
 

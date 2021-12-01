@@ -1,6 +1,6 @@
 <?php
 
-require('database.php');
+require('model/database.php');
 require('model/employee.php');
 require('model/employees_db.php');
 require('model/fpdf.php');
@@ -19,7 +19,23 @@ if ($action === NULL) {
 switch($action) {
     case 'employee_page':
         $employees = EmployeesDB::getAllEmployees();
-//        $testing = filter_input(INPUT_POST, 'numberHours');
+        $info= $_COOKIE['pretty'];
+  
+        $newInfo = json_decode($info,TRUE);
+        
+       
+                
+                for ($i = 0; $i < count($newInfo); $i++)
+                {
+                    echo $newInfo[$i]['id']; echo "<br>";
+                    $employeeId = $newInfo[$i]['id'];
+                    echo $newInfo[$i]['hours']; echo "<br>";
+                    $numberHours = $newInfo[$i]['hours'];
+                    echo $newInfo[$i]['total']; echo "<br>";
+                    $total = $newInfo[$i]['total'];
+                    EmployeesDB::insertPayment($employeeId, $numberHours, $total);
+                }
+
         include('view/employee_page.php');
         break;
     case 'add_employee_form':
@@ -47,7 +63,8 @@ switch($action) {
     case 'generate_payment_form':
         $pay = filter_input(INPUT_POST, 'pay');
         $employees = EmployeesDB::getPayEmployees($pay);
-        include('view/generatepayForm.php');
-       
+        include('view/generatePayForm.php');
+    case 'testing':
+        include('testing.php');
     
 }
